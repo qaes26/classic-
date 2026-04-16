@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إلى رهف - رسالة من الزمن الجميل</title>
+    <!-- استدعاء خطوط عربية كلاسيكية من Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink-color: #3b2b1d; /* لون حبر بني غامق */
+            --paper-light: #fbf5e9; /* لون ورق فاتح */
+            --paper-dark: #d5c3a3; /* لون ورق داكن للحواف */
+            --accent-color: #8c2a2a; /* أحمر كلاسيكي (عنابي) */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: radial-gradient(circle, var(--paper-light) 20%, var(--paper-dark) 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Amiri', serif;
+            color: var(--ink-color);
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* تأثير تشويش خفيف لمحاكاة الورق القديم */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .letter-container {
+            background-color: rgba(253, 246, 235, 0.85);
+            max-width: 600px;
+            width: 100%;
+            padding: 50px 40px;
+            border: 2px solid #b89b72;
+            border-radius: 4px;
+            box-shadow: 0 15px 35px rgba(59, 43, 29, 0.2), inset 0 0 40px rgba(184, 155, 114, 0.2);
+            position: relative;
+            z-index: 2;
+            outline: 1px solid #b89b72;
+            outline-offset: 6px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        /* زخرفة الزوايا */
+        .corner {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--accent-color);
+            opacity: 0.7;
+        }
+        .corner-tl { top: -8px; right: -8px; border-bottom: none; border-left: none; }
+        .corner-tr { top: -8px; left: -8px; border-bottom: none; border-right: none; }
+        .corner-bl { bottom: -8px; right: -8px; border-top: none; border-left: none; }
+        .corner-br { bottom: -8px; left: -8px; border-top: none; border-right: none; }
+
+        h1 {
+            font-family: 'Aref Ruqaa', serif;
+            font-size: 3rem;
+            text-align: center;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .ornament {
+            text-align: center;
+            color: #b89b72;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            letter-spacing: 10px;
+        }
+
+        .content {
+            font-size: 1.4rem;
+            line-height: 2.2;
+            text-align: justify;
+            text-justify: inter-word;
+            margin-bottom: 40px;
+        }
+
+        .content p {
+            margin-bottom: 20px;
+        }
+
+        .content p:first-child::first-letter {
+            font-family: 'Aref Ruqaa', serif;
+            font-size: 3rem;
+            color: var(--accent-color);
+            float: right;
+            margin-left: 10px;
+            line-height: 1;
+        }
+
+        .signature {
+            font-family: 'Aref Ruqaa', serif;
+            font-size: 1.5rem;
+            text-align: left;
+            margin-top: 50px;
+            color: var(--accent-color);
+            border-top: 1px dashed #b89b72;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .signature span {
+            font-size: 1.1rem;
+            color: var(--ink-color);
+            margin-top: 5px;
+            font-family: 'Amiri', serif;
+        }
+
+        /* مشغل الصوت الكلاسيكي */
+        .audio-player {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid rgba(184, 155, 114, 0.5);
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+        }
+
+        .play-btn {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            font-family: 'Amiri', serif;
+            font-size: 1.1rem;
+            padding: 8px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .play-btn:hover {
+            background: var(--accent-color);
+            color: var(--paper-light);
+        }
+
+        .play-icon {
+            font-size: 1.2rem;
+        }
+
+        .record-spin {
+            animation: spin 4s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* للخطوط الصغيرة والمتجاوبة */
+        @media (max-width: 600px) {
+            .letter-container {
+                padding: 30px 20px;
+            }
+            h1 { font-size: 2.5rem; }
+            .content { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- العنصر الصوتي -->
+    <audio id="classicAudio" loop>
+        <source src="http://googleusercontent.com/file_content/0" type="audio/mpeg">
+        متصفحك لا يدعم تشغيل الصوت.
+    </audio>
+
+    <div class="letter-container">
+        <!-- زوايا الزخرفة -->
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <h1>إلى رهف</h1>
+        <div class="ornament">◈ ◈ ◈</div>
+
+        <div class="audio-player">
+            <button class="play-btn" id="playBtn" onclick="toggleAudio()">
+                <span class="play-icon" id="playIcon">▶</span>
+                <span id="playText">استمعي إلى نبض الكلمات</span>
+            </button>
+        </div>
+
+        <div class="content">
+            <p>
+                يا سيدة القلب، وحكاية الروح التي لا تنتهي.. أكتب إليكِ بحروفٍ استعارت من الأغاني القديمة شجنها، ومن الليالي المقمرة سحرها.
+            </p>
+            <p>
+                عطركِ يعيدني إلى زمنٍ جميل، حيث الحب يُكتب بماء الذهب على أوراق الورد، وحيث النظرة تكفي لتنطق بألف قصيدة. أنتِ لحنٌ كلاسيكي يعزف على أوتار الفؤاد، كصوت أم كلثوم حين ينساب في ليالي الشوق، ليقول لكِ: "وعمري ما أشكي من حبك".
+            </p>
+            <p>
+                في عينيكِ أرى سطوراً لم تُكتب بعد، وفي ابتسامتكِ أجد ملاذي من كل ضجيج هذا العالم. كوني دائماً لحني الأبدي، وكلماتي التي لا تموت.
+            </p>
+        </div>
+
+        <div class="ornament">◈ ◈ ◈</div>
+
+        <div class="signature">
+            المُحب
+            <span>من إعداد قيس جازي</span>
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('classicAudio');
+        const playBtn = document.getElementById('playBtn');
+        const playIcon = document.getElementById('playIcon');
+        const playText = document.getElementById('playText');
+        let isPlaying = false;
+
+        function toggleAudio() {
+            if (isPlaying) {
+                audio.pause();
+                playIcon.innerHTML = '▶';
+                playIcon.classList.remove('record-spin');
+                playText.innerHTML = 'استمعي إلى نبض الكلمات';
+            } else {
+                audio.play().catch(error => {
+                    console.log("التشغيل التلقائي يحتاج إلى تفاعل المستخدم");
+                });
+                playIcon.innerHTML = '💽'; // أيقونة اسطوانة قديمة
+                playIcon.classList.add('record-spin');
+                playText.innerHTML = 'اللحن يعزف الآن...';
+            }
+            isPlaying = !isPlaying;
+        }
+    </script>
+</body>
+</html>
+
+```
